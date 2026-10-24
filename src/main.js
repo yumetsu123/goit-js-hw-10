@@ -41,11 +41,14 @@ form.addEventListener('submit', e => {
     makeOrder(PREP_TIME[`${selectedItems.drinkName}`], selectedItems.state).then(delay => {
         item.classList.remove('row-pending');
         item.classList.add('row-ok');
-        item.textContent = `✅${select.value} · готове · ${delay}ms`
+        item.textContent = `✅${selectedItems.drinkName} · готове · ${delay}ms`
     }).catch(delay => {
         item.classList.remove('row-pending');
         item.classList.add('row-err');
-        item.textContent = `❌${select.value} · скасовано · ${delay}ms`
+        item.textContent = `❌${selectedItems.drinkName} · скасовано · ${delay}ms`
+    }).finally(() => {
+        const date = new Date().toLocaleTimeString("uk-UA");
+        item.textContent += ` · ${date}`;
     })
 
 })
